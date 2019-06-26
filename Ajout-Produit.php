@@ -38,7 +38,6 @@ if (isset($_POST['prix']) === 1) {
 
 if (isset($_FILES['photo']) AND $_FILES['photo']['error'] == 0) 
 {
-// Testons si le fichier n'est pas trop gros
 if ($_FILES['photo']['size'] <= 1000000)
     {
         $infosfichier = pathinfo($_FILES['photo']['name']);
