@@ -4,8 +4,8 @@ if (!empty($_POST)) {
 
     $bdd = new PDO('mysql:host=localhost;dbname=ecommerce;charset=utf8;port=8889', 'root', 'root');
 
-    $request = 'INSERT INTO produit (titre, adresse_vendeur, ville_vendeur, cp_vendeur, prix, photo, type)
-                VALUES (:titre, :adresse_vendeur, :ville_vendeur, :cp_vendeur, :prix, :photo, :type )';
+    $request = 'INSERT INTO produit (titre, adresse_vendeur, ville_vendeur, cp_vendeur, prix, photo, type, description)
+                VALUES (:titre, :adresse_vendeur, :ville_vendeur, :cp_vendeur, :prix, :photo, :type, :description)';
 
     $ajoutproduit = $bdd->prepare($request);
 
@@ -16,7 +16,8 @@ if (!empty($_POST)) {
         'cp_vendeur'        => $_POST['cp_vendeur'],
         'prix'              => $_POST['prix'],
         'photo'             => $_POST['photo'],  
-        'type'              => $_POST['type'],  
+        'type'              => $_POST['type'],
+        'description'       => $_POST['description'],
 
     ]);   
 }
@@ -60,7 +61,7 @@ if ($_FILES['photo']['size'] <= 1000000)
 
 <?php include ('Partials/Header.php'); ?>
 
-<form action="Ajout-Produit.php" method="post" class="form" enctype="multipart/form-data">
+<form action="Ajout-Produit.php" method="post" class="form mt-3" enctype="multipart/form-data">
 
     <!-- Nom du produit -->
     <div class="form-group">
@@ -68,8 +69,29 @@ if ($_FILES['photo']['size'] <= 1000000)
         <input type="text" name="titre" class="form-control">
     </div>
 
-    <!-- Adresse du vendeur -->
+    <!-- PRIX -->
     <div class="form-group">
+        <label for="">PRIX</label>
+        <input type="text" name="prix" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label for="">Description du produit</label><br>
+        <textarea name="description" cols="40" rows="10" class="form-group" ></textarea>
+    </div>
+
+    <!-- Type de produit -->
+    <div class="form-group">
+        <input type="radio" name="type"><label for="">Parfum</label>
+        <input type="radio" name="type"><label for="">Maquillage</label>
+        <input type="radio" name="type"><label for="">Crème</label>
+
+    </div>
+
+    <!-- PHOTO PRODUIT -->
+
+        <!-- Adresse du vendeur -->
+        <div class="form-group">
         <label for="">Adresse du vendeur</label>
         <input type="text" name="adresse_vendeur" class="form-control">
     </div>
@@ -87,28 +109,11 @@ if ($_FILES['photo']['size'] <= 1000000)
         <input type="text" name="cp_vendeur" class="form-control">
     </div>
 
-    <!-- PRIX -->
-    <div class="form-group">
-    <?php 
-        
-?>
-        <label for="">PRIX</label>
-        <input type="text" name="prix" class="form-control">
-    </div>
-
-    <!-- Type de produit -->
-    <div class="form-group">
-        <input type="radio" name="type"><label for="">Parfum</label>
-        <input type="radio" name="type"><label for="">Maquillage</label>
-        <input type="radio" name="type"><label for="">Crème</label>
-
-    </div>
-
-    <!-- PHOTO PRODUIT -->
     <div>
         <label for="content">Envoyer la photo</label><br>
         <input type="file" name="photo" class="btn btn-info float-left" /><br />
     </div>
+
 
     <button class="btn btn-danger float-right">Ajouter un produit</button>
        
