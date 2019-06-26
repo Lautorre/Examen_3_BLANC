@@ -1,6 +1,9 @@
 <?php
 
+require 'PDO.php';
+
 if (!empty($_POST)) {
+    
 
     $bdd = new PDO('mysql:host=localhost;dbname=ecommerce;charset=utf8;port=8889', 'root', 'root');
 
@@ -15,7 +18,7 @@ if (!empty($_POST)) {
         'ville_vendeur'     => $_POST['ville_vendeur'],
         'cp_vendeur'        => $_POST['cp_vendeur'],
         'prix'              => $_POST['prix'],
-        'photo'             => $_POST['photo'],  
+        'photo'             => $_POST['photo']['name'],
         'type'              => $_POST['type'],
         'description'       => $_POST['description'],
 
@@ -79,20 +82,17 @@ if ($_FILES['photo']['size'] <= 1000000)
         <textarea name="description" cols="40" rows="10" class="form-group" ></textarea>
     </div>
 
-    <!-- Type de produit -->
+    <!-- Type d'achat -->
     <div class="form-group">
-        <input type="radio" name="type"><label for="">Parfum</label>
-        <input type="radio" name="type"><label for="">Maquillage</label>
-        <input type="radio" name="type"><label for="">Crème</label>
+        <input type="radio" name="type"><label for="">Enchère</label>
+        <input type="radio" name="type"><label for="">Vente</label>
 
     </div>
 
-    <!-- PHOTO PRODUIT -->
-
-        <!-- Adresse du vendeur -->
-        <div class="form-group">
-        <label for="">Adresse du vendeur</label>
-        <input type="text" name="adresse_vendeur" class="form-control">
+    <!-- Adresse du vendeur -->
+    <div class="form-group">
+    <label for="">Adresse du vendeur</label>
+    <input type="text" name="adresse_vendeur" class="form-control">
     </div>
 
     <!-- Ville du vendeur -->
@@ -107,6 +107,8 @@ if ($_FILES['photo']['size'] <= 1000000)
         <label for="">Code postal du vendeur</label>
         <input type="text" name="cp_vendeur" class="form-control">
     </div>
+
+    <!-- PHOTO PRODUIT -->
 
     <div>
         <label for="content">Envoyer la photo</label><br>
