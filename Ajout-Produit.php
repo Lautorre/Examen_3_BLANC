@@ -120,11 +120,5 @@ if ($_FILES['photo']['size'] <= 1000000)
 
 </form>
 
-
-
-
-
-
-
 <?php include ('Partials/footer.php'); ?>
 
